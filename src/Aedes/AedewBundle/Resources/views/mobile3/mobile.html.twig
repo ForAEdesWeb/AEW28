@@ -1,0 +1,72 @@
+{% extends "::base.html.twig" %}
+
+{% block head %}
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+
+    {% stylesheets
+        '@AedesAedewBundle/Resources/views/mobile1/style.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% javascripts
+        '@AedesAedewBundle/Resources/views/mobile1/jquMobile.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block body %}
+<div data-role="page" id="page1">
+    <div data-theme="c" data-role="header" data-position="fixed">
+        <h3>
+            {{ acc.getCompany() }}
+        </h3>
+        <a data-role="button" href="{{ path("mobileView") }}">Home</a>
+        <a data-role="button" href="{{ path("mobileView") }}">首頁</a>
+        {% for data in rootMenu %}
+        <a data-role="button" href="{{ path("mobileView", {id: data.getId()}) }}">
+            {{ data.getTitle() }}
+        </a>
+        {% endfor %}
+    </div>
+    <div data-role="content">
+        {% if file.isDir() %}
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            {% for data in child %}
+            <li data-theme="b">
+                <a href="{{ path("mobileView", {id: data.getId()}) }}" data-transition="slide">
+                    {{ data.getTitle() }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div>
+            <h2>{{ file.getTitle() }}</h2>
+            <p>{{ file.getSubject()|raw }}</p>
+            <div>
+                <a data-role="button" href="{{ path("mobileContact", {id: file.getId()}) }}">訂購</a>
+            </div>
+            <div>
+                {{ file.getContent()|raw }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block js %}
+$(function(){
+    $("option").click(
+        function(){
+            location.href = $(this).attr("value");
+        }
+    );
+});
+{% endblock %}

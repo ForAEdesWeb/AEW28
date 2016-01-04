@@ -1,0 +1,113 @@
+{% extends "::base.html.twig" %}
+
+{% block head %}
+
+<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css' />
+<link href='http://fonts.googleapis.com/css?family=Terminal+Dosis+Light' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+
+{% stylesheets
+    '@AedesAedewBundle/Resources/views/RestaurantTemplate/css/reset.css'
+    '@AedesAedewBundle/Resources/views/RestaurantTemplate/css/style.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% javascripts
+    '@AedesAedewBundle/Resources/views/RestaurantTemplate/js/jquery.mousewheel.js'
+    '@AedesAedewBundle/Resources/views/RestaurantTemplate/js/jquery.template.js'
+%}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
+
+{% block body %}
+        <div id="map"></div>
+        <div id="bf_container" class="bf_container">
+            <div id="bf_background" class="bf_background">
+                <img src="/public/RestaurantTemplate/images/background/default.jpg" alt="image1" style="display:none;"/>
+                <div class="bf_overlay"></div>
+            </div>
+            <div id="bf_page_menu" class="bf_menu" >
+                <h1 class="title">{{ acc.getCompany() }}<span>{{ acc.getSubject() }}</span></h1>
+                <ul>
+                    {% for data in rootMenu %}
+                    <li>
+                        {% if admin|default(false) %}
+                            <a href="{{ path("menu", {id: data.getId()}) }}"><span class="bf_hover"></span><span>{{ data.getTitle() }}</span></a>
+                            <a href="{{ path("setFile", {id: data.getId()}) }}">修改</a>
+                            <a href="{{ path("delFile", {id: data.getId()}) }}">刪除</a>
+                        {% else %}
+                            <a class="button" href="{{ path("file", {id: data.getId()}) }}"><span class="bf_hover"></span><span>{{ data.getTitle() }}</span></a>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="bf_page" id="home" style="display:block;">
+                <div class="bf_content_text">
+                    <div id="content">
+                        <h2>{{ file.getTitle() }}</h2>
+                        {% if file.getShareButton()|default(false) %}
+                        <div>
+                            <div class="fb-like" data-send="true" data-layout="button_count" data-width="50" data-show-faces="true"></div>
+                            <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+                            <g:plusone></g:plusone>
+                        </div>
+                        {% endif %}
+
+                        {% if file.isDir() %}
+
+                        <ul id="bf_dishes">
+                        {% for data in child %}
+                            <li><a href="{{ path("file", {id: data.getId()}) }}">{{ data.geTitle() }}</a></li>
+                        {% endfor %}
+                        </ul>
+
+                        {% else %}
+
+                            {% if admin|default(false) %}
+                                <a href="{{ path("setFile", {id: file.getId()}) }}">修改</a>
+                                <a href="{{ path("delFile", {id: file.getId()}) }}">刪除</a>
+                            {% endif %}
+
+                            <div>
+                                {{ file.getSubject()|raw }}
+                            </div>
+                            <div>
+                                <a href="{{ path("contact", {id: file.getId()}) }}">聯繫</a>
+                            </div>
+                            <div>
+                                {{ file.getContent()|raw }}
+                            </div>
+
+                            {% if file.getFacebookComment()|default(false) %}
+                            <div id="facebookCME" class="fb-comments" data-href="http://{{ acc.getDomain() }}/{{ file.getId() }}" data-num-posts="2" data-width="470" data-colorscheme="dark"></div>
+                            {% endif %}
+                            <br style="clear: both;" />
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bf_footer">
+            <a class="bf_left" href="http://tympanus.net/Development/CircularDiscographyTemplate/"><span>&laquo; Previous Demo:</span> Circular Discography Template with jQuery</a>
+            <a href="http://tympanus.net/codrops/2011/04/21/restaurant-template/"><strong>back to the Codrops tutorial</strong></a>
+            <a href="http://www.flickr.com/photos/krossbow/" target="_blank">and krossbow</a>
+            <a href="http://www.flickr.com/people/avlxyz/" target="_blank">Photography by avlxyz</a>
+        </div>
+        <!-- The JavaScript -->
+        <!-- the mousewheel plugin - optional to provide mousewheel support -->
+        <div style="text-align: center; font-size: 0.75em;">Design Downloaded from <a href="http://www.template4all.com/css/">Free CSS Templates</a> | <a href="http://www.freethemes4all.com/">Free Website Templates</a>.</div>
+{% endblock %}
+
+{% block js %}
+    $(function(){
+        setTimeout("flushFbHeiht();", 2000);
+    });
+
+    function flushFbHeiht()
+    {
+        $("#content").height($("#content").height() + $("#facebookCME").height() * 2);
+    }
+{% endblock %}

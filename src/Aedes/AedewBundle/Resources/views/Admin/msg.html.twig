@@ -1,0 +1,19 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ msg }}{% endblock %}
+
+{% block head %}
+<meta http-equiv="refresh" content="0; url={{ path(sendTo) }}">
+{% endblock %}
+
+{% block body %}
+  <h1>{{ msg }}</h1>
+  <a href="{{ path(sendTo) }}">繼續操作</a>
+{% endblock %}
+
+{% block js %}
+$(function(){
+    alert("{{ msg }}");
+    window.location.href = "{{ path(sendTo) }}";
+});
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "::base.html.twig" %}
+
+{% block head %}
+{% stylesheets
+    '@AedesAedewBundle/Resources/views/stickersMobile/css/style.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+<div class="header">
+        <div class="logo">
+            {{ acc.getLogo()|raw }}
+        </div>
+        <button id="show">Menu <span>+</span> <span style="display:none;">-</span></button>
+        <div class="clear"></div>
+    </div>
+    <div class="nav">
+        <ul>
+            {% for data in rootMenu %}
+            <li><a href="{{ path("mobileView", {id: data.getId()}) }}">{{ data.getTitle() }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="content">
+        {% if file.isDir() %}
+            {% for data in child %}
+        <div class="blog">
+            <h2><a href="{{ path("mobileView", {id: data.getId()}) }}">{{ data.getTitle() }}</a></h2>
+            <div class="blog-img">{{ data.getSubject()|raw }}</div>
+            <div class="blog-content" style="height: 30px; overflow: hidden;">
+                {{ data.getContent()|raw }}
+            </div>
+        </div>
+            {% endfor %}
+        {% else %}
+        <div class="blog">
+            <h2>{{ file.getTitle() }}</h2>
+            <div class="blog-img">{{ file.getSubject()|raw }}</div>
+            <div>
+                <a href="{{ path("mobileContact", {id: file.getId()}) }}">訂購</a>
+            </div>
+            <div class="blog-content">
+                {{ file.getContent()|raw }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+<div class="footer">
+    <p>&copy; <a href="#">{{ acc.getDomain() }}</a></p>
+</div>
+    <p class="author">Thanks to <a href="http://www.mobifreaks.com/?p=664">Mobifreaks</a></p>
+<script type="text/javascript">
+	$('.nav').hide();
+	$('#show').click(function (){
+		$(".nav").toggle();
+		$("span").toggle();
+	});
+</script>
+{% endblock %}

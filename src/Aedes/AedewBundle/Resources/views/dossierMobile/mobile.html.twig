@@ -1,0 +1,82 @@
+{% extends "::base.html.twig" %}
+
+{% block head %}
+{% stylesheets
+    '@AedesAedewBundle/Resources/views/dossierMobile/style.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+<div class="logo">
+    {{ acc.getLogo()|raw }}
+</div>
+<div class="header">
+	<div class="wrap top-bar">
+    	<button class="menu-show">
+            <img src="/public/dossierMobile/images/plus.png"" alt="plus">
+        </button>
+    	<button class="menu-hide">
+            <img src="/public/dossierMobile/images/minus.png" alt="minus">
+        </button>
+        <div class="clear-both"></div>
+        <nav class="menu">
+            <ul>
+                {% for data in rootMenu %}
+                <li><a href="{{ path("mobileView", {id: data.getId()}) }}">{{ data.getTitle() }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="content">
+    <div class="wrap">
+        {% if file.isDir() %}
+            {% for data in child %}
+        <div class="post">
+            <h2><a href="{{ path("mobileView", {id: data.getId()}) }}">{{ data.getTitle() }}</a></h2>
+            <p>{{ data.getSubject()|raw }}</p>
+            <div style="height: 30px; overflow: hidden;">
+                {{ data.getContent()|raw }}
+            </div>
+        </div>
+            {% endfor %}
+        {% else %}
+        <div class="post">
+            <h2>{{ file.getTitle() }}</h2>
+            <p>{{ file.getSubject()|raw }}</p>
+            <div>
+                <a href="{{ path("mobileContact", {id: file.getId()}) }}">訂購</a>
+            </div>
+            <div>
+                {{ file.getContent()|raw }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<div class="footer">
+	<div class="wrap bot-bar">
+    	&copy; 2011 by domain.tld &bull; design by <a href="http://mobifreaks.com">mobifreaks.com</a>
+        <div class="clear-both"></div>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" class="license"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a>
+    </div>
+</div>
+<script type="text/javascript">
+	$('.menu').hide();
+	$('.menu-show').show();
+	$('.menu-hide').hide();
+	$('.menu-show').click(function(){
+		$('.menu-show').toggle();
+		$('.menu-hide').toggle();
+		$('.menu').slideDown();
+	});
+	$('.menu-hide').click(function(){
+		$('.menu-hide').toggle();
+		$('.menu-show').toggle();
+		$('.menu').slideUp();
+	});
+</script>
+<a href="http://www.mobifreaks.com" title="site design by Mobifreaks.com"></a>
+{% endblock %}

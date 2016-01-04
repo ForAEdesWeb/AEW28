@@ -1,0 +1,8 @@
+[22-Jul-2013 04:40:15 America/Denver] PHP Notice:  Undefined index: lewisCommand in /home4/sensetop/public_html/jpAsiaSystem/lewisCommandLinePhpSymfony.php on line 3
+[22-Jul-2013 04:40:15 America/Denver] PHP Warning:  system(): Cannot execute a blank command in /home4/sensetop/public_html/jpAsiaSystem/lewisCommandLinePhpSymfony.php on line 3
+[22-Jul-2013 04:42:06] PHP Warning:  system() [<a href='function.system'>function.system</a>]: Unable to fork [./app/console doctrine:schema:update] in /home4/sensetop/public_html/jpAsiaSystem/lewisCommandLinePhpSymfony.php on line 3
+[22-Jul-2013 04:42:17] PHP Warning:  system() [<a href='function.system'>function.system</a>]: Unable to fork [./app/console doctrine:schema:update] in /home4/sensetop/public_html/jpAsiaSystem/lewisCommandLinePhpSymfony.php on line 3
+[22-Jul-2013 04:42:41] PHP Warning:  system() [<a href='function.system'>function.system</a>]: Unable to fork [./app/console doctrine:schema:update] in /home4/sensetop/public_html/jpAsiaSystem/lewisCommandLinePhpSymfony.php on line 3
+[22-Jul-2013 04:43:05] PHP Warning:  system() [<a href='function.system'>function.system</a>]: Unable to fork [./app/console doctrine:schema:update --force] in /home4/sensetop/public_html/jpAsiaSystem/lewisCommandLinePhpSymfony.php on line 3
+[22-Jul-2013 04:43:33] PHP Warning:  system() [<a href='function.system'>function.system</a>]: Unable to fork [./app/console doctrine:schema:update --force] in /home4/sensetop/public_html/jpAsiaSystem/lewisCommandLinePhpSymfony.php on line 3
+[22-Jul-2013 04:44:16] PHP Warning:  system() [<a href='function.system'>function.system</a>]: Unable to fork [./app/console doctrine:schema:update --force] in /home4/sensetop/public_html/jpAsiaSystem/lewisCommandLinePhpSymfony.php on line 3

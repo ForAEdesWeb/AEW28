@@ -1,0 +1,218 @@
+{% extends "::base.html.twig" %}
+
+{% block head %}
+    {% stylesheets
+        '@AedesAedewBundle/Resources/views/celery/css/style.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% javascripts
+        '@AedesAedewBundle/Resources/views/celery/3rd/js/turn.js/turn.min.js'
+        '@AedesAedewBundle/Resources/views/celery/js/movingClass.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <link href='http://fonts.googleapis.com/css?family=Italianno' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Domine' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block body %}
+        <div id="header">
+            <div class="photo">
+                <div title="logo">
+                    &nbsp;
+                </div>
+                {% if file.getShareButton()|default(false) %}
+                    <div title="social">
+                        <div class="fb-like" data-send="true" data-layout="button_count" data-width="50" data-show-faces="true"></div>
+                        <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+                        <g:plusone></g:plusone>
+                {% endif %}
+                </div>
+                <div title="chrMov">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="botton">
+                {% for data in rootMenu %}
+                    {% if admin|default(false) %}
+                        <a href="{{ path("menu", {id: data.getId()}) }}">{{ data.getTitle() }}</a>
+                    {% else %}
+                        <a href="{{ path("file", {id: data.getId()}) }}">{{ data.getTitle() }}</a>
+                    {% endif %}
+                {% endfor %}
+                <br class="cr" />
+            </div>
+        </div>
+        <div id="content">
+            {% if file.getIsHideContact()|default(false) %}
+            {% else %}
+            <div>
+                <a href="{{ path("contact", {id: file.getId()}) }}">聯繫</a>
+            </div>
+            {% endif %}
+
+            {% if admin|default(false) %}
+                <a href="{{ path("setFile", {id: file.getId()}) }}" style="color: #000;">修改</a>
+                <a href="{{ path("delFile", {id: file.getId()}) }}" style="color: #000;">刪除</a>
+            {% endif %}
+
+            {% if file.isDir() %}
+                <h1>{{ file.getTitle() }}</h1>
+
+                <ol id="product">
+                    {% for data in child %}
+                        <li>
+                            {% if admin|default(false) %}
+                                <a href="{{ path("menu", {id: data.getId()}) }}">{{ data.getTitle() }}</a>
+                            {% else %}
+                                <a href="{{ path("file", {id: data.getId()}) }}">{{ data.getTitle() }}</a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ol>
+
+            {% elseif file.isMsg() %}
+
+                {% if admin|default(false) %}
+                {% else %}
+                    <meta http-equiv="refresh" content="0;URL='{{ path("contact") }}'">
+                {% endif %}
+            {% elseif file.isMap() %}
+                <style>
+                    #googleMap
+                    {
+                        width: 500px;
+                        height: 500px;
+                        max-width: 100%;
+                        max-height: 100%;
+                        margin: 0 auto;
+                        display: block;
+                    }
+                </style>
+                <iframe id="googleMap"
+                        frameborder="0"
+                        scrolling="no"
+                        marginheight="0"
+                        marginwidth="0"
+                        src="">
+                </iframe>
+                <script>
+                    var nowPosition = "";
+
+                    $(function(){
+                        navigator.geolocation.getCurrentPosition(saveNowPosition);
+                    });
+
+
+                    function saveNowPosition(position)
+                    {
+                        var address = "{{ acc.getAddress() }}";
+
+                        nowPosition = position.coords.latitude + ", " + position.coords.longitude;
+
+                        address = "https://maps.google.com.tw/maps?saddr=" + encodeURIComponent(nowPosition) + "&daddr=" + encodeURIComponent(address) + "&output=embed"
+
+                        $("#googleMap").attr("src", address);
+                    }
+                </script>
+            {% elseif file.isQR() %}
+                <img id="qr300" src="#" style="margin: 0 auto; display: block;" />
+                <script>
+                    $(function(){
+                        $("#qr300").attr("src", "http://chart.apis.google.com/chart?cht=qr&chl=" + encodeURIComponent("{{ acc.getCompany() }}\n網址:{{ acc.getDomain() }}\n電話: {{ acc.getPhone() }}\n地址 : {{ acc.getAddress() }}") + "&chs=300x300");
+                    });
+                </script>
+            {% else %}
+                {{ file.getSubject()|raw }}
+                {{ file.getContent()|raw }}
+            {% endif %}
+
+
+            {% if file.getFacebookComment()|default(false) %}
+            <div id="facebookCME" class="fb-comments" data-href="http://{{ acc.getDomain() }}/{{ file.getId() }}" data-num-posts="2" data-width="320" data-colorscheme="dark"></div>
+            {% endif %}
+        </div>
+        <div id="footer">
+            {{ acc.getFooter()|raw }}
+        </div>
+        <script>
+
+            $(function(){
+
+                if(0 < navigator.appVersion.search("WebKit")) {
+                } else {
+                    alert("您的瀏覽器不支援 webkit\n請使用 Chrome 瀏覽，謝謝。");
+                    window.location.href = "http://google.com/chrome";
+                }
+
+                chrMov();
+                logoMov();
+                loadTurn();
+
+            });
+
+            $(window).bind('keydown', function(e){
+
+                if (e.keyCode==37)
+                    $('#menu').turn('previous');
+                else if (e.keyCode==39)
+                    $('#menu').turn('next');
+
+            });
+
+            function loadTurn()
+            {
+                $('#menu').turn({
+                    display: 'double',
+                    acceleration: true,
+                    gradients: !$.isTouch,
+                    elevation:50,
+                    when: {
+                        turned: function(e, page) {
+                            /*console.log('Current view: ', $(this).turn('view'));*/
+                        }
+                    }
+                });
+            }
+
+            function chrMov()
+            {
+                var movObject = $('#header .photo div[title="chrMov"]');
+
+                var to = movObject.css("background-position-x");
+
+                to = to.replace("px", "");
+                to = parseInt(to);
+                to = to - 134;
+
+                if(-1600 > to)
+                    to = - 7;
+
+                movObject.css("background-position-x", to.toString() + "px");
+
+                setTimeout("chrMov();", 200);
+            }
+
+            function logoMov()
+            {
+                var movObject = $('#header .photo div[title="logo"]');
+
+                var to = movObject.css("background-position-x");
+
+                to = to.replace("px", "");
+                to = parseInt(to);
+                to = to - 135;
+
+                if(-1600 > to)
+                    to = - 14;
+
+                movObject.css("background-position-x", to.toString() + "px");
+
+                setTimeout("logoMov();", 100);
+            }
+        </script>
+{% endblock %}

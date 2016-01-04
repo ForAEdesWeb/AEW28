@@ -1,0 +1,19 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Complete{% endblock %}
+
+{% block head %}
+<meta http-equiv="refresh" content="0; url={{ path('menu') }}">
+{% endblock %}
+
+{% block body %}
+  <h1>Complete</h1>
+  <a href="{{ path("menu") }}">繼續操作</a>
+{% endblock %}
+
+{% block js %}
+$(function(){
+    alert("Complete");
+    window.location.href = "{{ path('menu') }}";
+});
+{% endblock %}

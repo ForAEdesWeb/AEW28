@@ -1,0 +1,171 @@
+{% if mobile|default(false) %}
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN"
+"http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+{% else %}
+<!DOCTYPE html>
+{% endif %}
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        {% if mobile|default(false) %}
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+        {% endif %}
+        <title>{% block title %}{{ acc.getCompany() }} - {{ file.getTitle() }}{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        {% javascripts
+            '@AedesAedewBundle/Resources/public/3part/js/jquery-1.8.2.min.js'
+            '@AedesAedewBundle/Resources/public/3part/js/jquery.easing.1.3.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% block head %}{% endblock %}
+        <script type="text/javascript">
+            {% block js %}{% endblock %}
+        </script>
+        {% if admin|default(false) %}
+            <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+            {% stylesheets
+                '@AedesAedewBundle/Resources/public/css/toolbar.css'
+            %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+            <style>
+                body, head, html
+                {
+                    padding: 0;
+                    margin: 0;
+                }
+
+                #headerAdminUser
+                {
+                    padding: 10px;
+                    background-color: #80bf28;
+                }
+
+                #headerAdminUser .logo
+                {
+                    width: 0px;
+                    height: 75px;
+                    padding: 0px 0px 0px 300px;
+                    margin: 0px 30px 0px 0px;
+                    background-image: url("http://game.aedesweb.com/img/AEShow.jpg");
+                    font-size: 10px;
+                    display: block;
+                    overflow: hidden;
+                }
+
+                #headerAdminUser .title
+                {
+                    width: 300px;
+                    margin: 5px 28px 0px 0px;
+                    font-size: 20px;
+                    display: block;
+                    overflow: hidden;
+                    color: #FFFFFF;
+                    float: left;
+                }
+
+                #headerAdminUser a
+                {
+                    color: #FFFFFF;
+                    margin: 5px 28px 0px 0px;
+                    display: block;
+                    float: left;
+                }
+
+                #contentAdminUser
+                {
+                    margin: 58px;
+                }
+
+                .clear
+                {
+                    clear: both;
+                    width: 0px;
+                    height: 0px;
+                    overflow: hidden;
+                }
+            </style>
+        {% endif %}
+        <link rel="icon"
+              href="http://aedesweb.com/_graphics/favicon.ico" />
+    </head>
+    <body>
+        {% if admin|default(false) %}
+            <div id="headerAdminUser">
+                <h1 class="logo">AEShow</h1>
+                <br class="clear" />
+            </div>
+
+            <div id="toolbar">
+                <a href="{{ path("userSetAcc") }}">網頁設定</a>
+                <a href="{{ path("newFile") }}">新增頁面</a>
+                <a href="{{ path("viewContact") }}">訊息總覽</a>
+                <a href="{{ path("login") }}">登入</a>
+                <a href="{{ path("logout") }}">登出</a>
+            </div>
+        {% endif %}
+
+        {% block body %}{% endblock %}
+
+        {% if mobile|default(false) %}
+        {% else %}
+            <div id="fb-root"></div>
+            <script>
+             (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/zh_TW/all.js#xfbml=1&appId=303410646394019";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            </script>
+        {% endif %}
+
+        {% block javascripts %}{% endblock %}
+        <script>
+            $(function(){
+                $("title").each(function(){
+                    var content = $(this).html();
+                    content = content.replace("-RED-START-", "");
+                    content = content.replace("-RED-END-", "");
+
+                    content = content.replace("-BIG-START-", "");
+                    content = content.replace("-BIG-END-", "");
+
+                    content = content.replace("-BREAK-", "");
+
+                    $(this).html(content);
+                });
+
+                fontCss();
+            });
+
+            function fontCss(){
+
+                $("a, h1, h2, h3, span, p").each(function(){
+                    var content = $(this).html();
+
+                    content = content.replace("-RED-START-", "<span style=\"color: red;\">");
+                    content = content.replace("-RED-END-", "</span>");
+
+                    content = content.replace("-BIG-START-", "<span style=\"font-size: 1.5em;\">");
+                    content = content.replace("-BIG-END-", "</span>");
+
+                    content = content.replace("-BREAK-", "<br/>");
+
+                    $(this).html(content);
+                });
+
+                if(
+                {% if mobile|default(false) %}
+                    true
+                {% else %}
+                    false
+                {% endif %}
+                )
+                    setTimeout("fontCss();", 2000);
+            }
+        </script>
+    </body>
+</html>

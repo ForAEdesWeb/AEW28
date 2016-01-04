@@ -1,0 +1,43 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Form{% endblock %}
+
+{% block body %}
+<div style="font-size: 1.5em;">
+    <a href="javascript:history.back()">回上一頁</a>
+</div>
+<div style="font-size: 2em;">
+    聯絡電話 : <a href="tel:{{ acc.getPhone() }}">{{ acc.getPhone() }}</a>
+</div>
+<form action="" method="post" {{ form_enctype(form) }}>
+  {{ form_widget(form) }}
+  <input value="send" type="submit" />
+</form>
+{% endblock %}
+
+{% block js %}
+$(function(){
+    $("label").each(function(){
+
+        if($(this).html() == "Title")
+            $(this).html("主旨");
+
+        if($(this).html() == "Name")
+            $(this).html("尊稱");
+
+        if($(this).html() == "Phone")
+            $(this).html("聯絡電話");
+
+        if($(this).html() == "Taget")
+            $(this).html("商品");
+
+        if($(this).html() == "Content")
+            $(this).html("內容");
+    });
+
+    $("option").each(function(){
+        if($(this).html() == "unset")
+            $(this).html("無");
+    });
+});
+{% endblock %}

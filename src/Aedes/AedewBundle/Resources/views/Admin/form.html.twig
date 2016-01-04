@@ -1,0 +1,103 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Form{% endblock %}
+
+{% block stylesheets %}
+<style>
+label
+{
+    width: 96px;
+    height: 20px;
+    padding: 2px;
+    font-size: 18px;
+    color: #80bf28;
+    display: block;
+    float: left;
+}
+input, textarea, div
+{
+    clear: both;
+}
+.button
+{
+    margin-left: 100px;
+    cursor: pointer;
+    border: 0;
+    background-color: #80bf28;
+    color: #fff;
+    font-size: 3em;
+    font-weight: bold;
+    outline: 0;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<form id="contentAdminUser" action="" method="post" {{ form_enctype(form) }}>
+  {{ form_widget(form) }}
+  <input class="button" type="submit" />
+</form>
+{% endblock %}
+
+{% block js %}
+$(function(){
+    $("textarea").addClass("ckeditor").removeAttr("required");
+});
+
+$(function(){
+    $("label").each(function(){
+        if($(this).html() == "Username")
+            $(this).html("帳號");
+
+        if($(this).html() == "Password")
+            $(this).html("密碼");
+
+        if($(this).html() == "Company")
+            $(this).html("公司");
+
+        if($(this).html() == "Subject")
+            $(this).html("主旨");
+
+        if($(this).html() == "Footer")
+            $(this).html("底部資料");
+
+        if($(this).html() == "Defaultfile")
+            $(this).html("預設頁面");
+
+        if($(this).html() == "Style")
+            $(this).html("版型");
+
+        if($(this).html() == "Title")
+            $(this).html("標題");
+
+        if($(this).html() == "Content")
+            $(this).html("內容");
+
+        if($(this).html() == "Type")
+            $(this).html("形式");
+
+        if($(this).html() == "Parent")
+            $(this).html("放在...之下");
+
+        if($(this).html() == "Sort")
+            $(this).html("順序");
+
+        if($(this).html() == "Ishide")
+            $(this).html("是否隱藏");
+
+        if($(this).html() == "Ishidecontact")
+            $(this).html("隱藏訂購");
+
+        if($(this).html() == "Sharebutton")
+            $(this).html("分享按鈕");
+
+        if($(this).html() == "Facebookcomment")
+            $(this).html("FB 回應列");
+    });
+
+    $("option").each(function(){
+        if($(this).html() == "rootDir")
+            $(this).html("根目錄");
+    });
+});
+{% endblock %}

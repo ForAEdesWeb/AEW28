@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+    <head>
+        <title>西洋芹洋食風味管</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href='http://fonts.googleapis.com/css?family=Italianno' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Domine' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script id="turn" type="text/javascript" src="./3rd/js/turn.js/turn.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/movingClass.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <div class="photo">
+                <div title="logo">
+                    &nbsp;
+                </div>
+                <!--<div title="button">
+                    <a href="#"><img src="./img/zh.jpg" />中文</a>
+                    <a href="#"><img src="./img/en.jpg" />English</a>
+                </div>-->
+                <div title="social">
+                    <div class="fb-like" data-send="true" data-layout="button_count" data-width="50" data-show-faces="true"></div>
+                    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+                    <g:plusone></g:plusone>
+                </div>
+                <div title="chrMov">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="botton">
+                <a href="#">中文</a>
+                <a href="#">English</a>
+                <a href="index.html">首頁</a>
+                <a href="./menu.html">菜單</a>
+                <a>地址</a>
+                <a>最新消息</a>
+                <a>聯絡我們</a>
+                <br class="cr" />
+            </div>
+        </div>
+        <div id="content">
+            <!-- <img src="./img/01.png" />
+            <div title="1" class="movingBackground">
+                <div title="1" class="mask">
+                    &nbsp;
+                </div>
+            </div>-->
+
+            <div class="textBox">
+
+                <div id="menu">
+                    <div style="background-image:url('./img/menu/0.jpg');"></div>
+                    <div style="background-image:url('./img/menu/1.jpg');"></div>
+                    <div style="background-image:url('./img/menu/2.jpg');"></div>
+                    <div style="background-image:url('./img/menu/3.jpg');"></div>
+                    <div style="background-image:url('./img/menu/4.jpg');"></div>
+                    <div style="background-image:url('./img/menu/5.jpg');"></div>
+                    <div style="background-image:url('./img/menu/6.jpg');"></div>
+                    <div style="background-image:url('./img/menu/7.jpg');"></div>
+                    <div style="background-image:url('./img/menu/8.jpg');"></div>
+                    <div style="background-image:url('./img/menu/9.jpg');"></div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <!-- sql date -->
+            <div style="float: left">
+                <h1 style="margin: 0;"><a href="http://celery.aedew.com">Celery.Aedew.Com</a></h1>
+            </div>
+            <div style="color: #fff; margin: 3px 30px; padding: 0 10px; float: right; border-width: 0 5px; border-style: solid; border-color: #fff; font-size: 0.8em;">
+                地址：台中市豐原區圓環西路181號
+                電話：04-2523-7798<br/>
+                營業時間：早上十點到晚上十點，
+                營業時間：六日九點營業。
+            </div>
+            <div style="padding: 0; margin-top: 15px; display: block; float: right; color: #cda16b;">
+                提供免費停車場，吸菸區，兒童區另有飛鏢遊樂機。
+            </div>
+            <br class="cr" />
+            <!-- sql date -->
+        </div>
+
+
+        <!-- facebook -->
+        <div id="fb-root"></div>
+        <script>
+
+            $(function(){
+
+                if(0 < navigator.appVersion.search("WebKit")) {
+                } else {
+                    alert("您的瀏覽器不支援 webkit\n請使用 Chrome 瀏覽，謝謝。");
+                    window.location.href = "http://google.com/chrome";
+                }
+
+                chrMov();
+                logoMov();
+                loadTurn();
+
+            });
+
+
+
+            $(window).bind('keydown', function(e){
+
+                if (e.keyCode==37)
+                    $('#menu').turn('previous');
+                else if (e.keyCode==39)
+                    $('#menu').turn('next');
+
+            });
+
+            function loadTurn()
+            {
+                $('#menu').turn({
+                    display: 'double',
+                    acceleration: true,
+                    gradients: !$.isTouch,
+                    elevation:50,
+                    when: {
+                        turned: function(e, page) {
+                            /*console.log('Current view: ', $(this).turn('view'));*/
+                        }
+                    }
+                });
+            }
+
+            function chrMov()
+            {
+                var movObject = $('#header .photo div[title="chrMov"]');
+
+                var to = movObject.css("background-position-x");
+
+                to = to.replace("px", "");
+                to = parseInt(to);
+                to = to - 134;
+
+                if(-1600 > to)
+                    to = - 7;
+
+                movObject.css("background-position-x", to.toString() + "px");
+
+                setTimeout("chrMov();", 200);
+            }
+
+            function logoMov()
+            {
+                var movObject = $('#header .photo div[title="logo"]');
+
+                var to = movObject.css("background-position-x");
+
+                to = to.replace("px", "");
+                to = parseInt(to);
+                to = to - 135;
+
+                if(-1600 > to)
+                    to = - 14;
+
+                movObject.css("background-position-x", to.toString() + "px");
+
+                setTimeout("logoMov();", 100);
+            }
+
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/zh_TW/all.js#xfbml=1&appId=303410646394019";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <!-- end facebook -->
+    </body>
+</html>

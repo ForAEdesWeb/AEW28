@@ -1,0 +1,142 @@
+{% extends "::base.html.twig" %}
+
+{% block head %}
+    {% stylesheets
+        '@AedesAedewBundle/Resources/views/web2dc/css/style.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+    <div id="logo">
+        {{ acc.getLogo()|raw }}
+    </div>
+    <div id="button">
+        {% for data in rootMenu %}
+            {% if admin|default(false) %}
+                <a href="{{ path("menu", {id: data.getId()}) }}">{{ data.getTitle() }}</a>
+            {% else %}
+                <a href="{{ path("file", {id: data.getId()}) }}">{{ data.getTitle() }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div id="main">
+        <h1 class="title">{{ acc.getCompany() }}</h1>
+        <div class="sharedButton">
+            {% if file.getShareButton()|default(false) %}
+                <div class="fb-like" data-send="true" data-layout="button_count" data-width="50" data-show-faces="true"></div>
+                <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+                <g:plusone></g:plusone>
+            {% endif %}
+        </div>
+        <br class="cr" />
+        <div class="content">
+
+            {% if admin|default(false) %}
+                <a href="{{ path("setFile", {id: file.getId()}) }}">修改</a>
+                <a href="{{ path("delFile", {id: file.getId()}) }}">刪除</a>
+            {% endif %}
+
+            {% if file.getIsHideContact()|default(false) %}
+            {% else %}
+            <div>
+                <a href="{{ path("contact", {id: file.getId()}) }}">聯繫</a>
+            </div>
+            {% endif %}
+
+            {% if file.isDir() %}
+
+                <ol id="product">
+                    {% for data in child %}
+                        <li>
+                            <h2>{{ data.getSubject()|raw }}</h2>
+                            <h1>
+                                {% if admin|default(false) %}
+                                    <a href="{{ path("menu", {id: data.getId()}) }}">{{ data.getTitle() }}</a>
+                                {% else %}
+                                    <a href="{{ path("file", {id: data.getId()}) }}">{{ data.getTitle() }}</a>
+                                {% endif %}
+                            </h1>
+                        </li>
+                    {% endfor %}
+                </ol>
+
+            {% elseif file.isMsg() %}
+
+                {% if admin|default(false) %}
+                {% else %}
+                    <meta http-equiv="refresh" content="0;URL='{{ path("contact") }}'">
+                {% endif %}
+            {% elseif file.isMap() %}
+                <style>
+                    #googleMap
+                    {
+                        width: 500px;
+                        height: 500px;
+                        max-width: 100%;
+                        max-height: 100%;
+                    }
+                </style>
+                <iframe id="googleMap"
+                        frameborder="0"
+                        scrolling="no"
+                        marginheight="0"
+                        marginwidth="0"
+                        src="#">
+                </iframe>
+                <script>
+                    var nowPosition = "";
+
+                    $(function(){
+                        navigator.geolocation.getCurrentPosition(saveNowPosition);
+                    });
+
+
+                    function saveNowPosition(position)
+                    {
+                        var address = "{{ acc.getAddress() }}";
+
+                        nowPosition = position.coords.latitude + ", " + position.coords.longitude;
+
+                        address = "https://maps.google.com.tw/maps?saddr=" + encodeURIComponent(nowPosition) + "&daddr=" + encodeURIComponent(address) + "&output=embed"
+
+                        $("#googleMap").attr("src", address);
+                    }
+                </script>
+            {% elseif file.isQR() %}
+                <div>
+                    <img id="qr300" src="#" />
+                </div>
+                <script>
+                    $(function(){
+                        $("#qr300").attr("src", "http://chart.apis.google.com/chart?cht=qr&chl=" + encodeURIComponent("{{ acc.getCompany() }}\n網址:{{ acc.getDomain() }}\n電話: {{ acc.getPhone() }}\n地址 : {{ acc.getAddress() }}") + "&chs=300x300");
+                    });
+                </script>
+            {% else %}
+
+
+                <div id="product">
+                    <div>
+                        {{ file.getSubject()|raw }}
+                    </div>
+                    <div>
+                        {{ file.getContent()|raw }}
+                    </div>
+                </div>
+
+            {% endif %}
+
+            {% if file.getFacebookComment()|default(false) %}
+            <div id="facebookCME" class="fb-comments" data-href="http://{{ acc.getDomain() }}/{{ file.getId() }}" data-num-posts="2" data-width="320" data-colorscheme="dark"></div>
+            {% endif %}
+            <br class="cr" />
+
+            <div class="makeScrBar">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+    <div id="footer">{{ acc.getFooter()|raw }}</div>
+    <div class="leftPink"></div>
+{% endblock %}

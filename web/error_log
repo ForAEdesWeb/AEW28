@@ -1,0 +1,23 @@
+[14-Nov-2012 01:51:27 UTC] PHP Fatal error:  Uncaught exception 'Symfony\Component\Config\Definition\Exception\InvalidConfigurationException' with message 'Unrecognized options "collate" under "doctrine.dbal"' in /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/ArrayNode.php:268
+Stack trace:
+#0 /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/BaseNode.php(195): Symfony\Component\Config\Definition\ArrayNode->normalizeValue(Array)
+#1 /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/ArrayNode.php(260): Symfony\Component\Config\Definition\BaseNode->normalize(Array)
+#2 /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/BaseNode.php(195): Symfony\Component\Config\Definition\ArrayNode->normalizeValue(Array)
+#3 /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/Processor.php(35): Symfony\Component\Config\Definition\BaseNode->normalize(Array)
+#4 /home4/sensetop/public_h in /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/ArrayNode.php on line 268
+[14-Nov-2012 01:51:41 UTC] PHP Fatal error:  Uncaught exception 'Symfony\Component\Config\Definition\Exception\InvalidConfigurationException' with message 'Unrecognized options "collate" under "doctrine.dbal"' in /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/ArrayNode.php:268
+Stack trace:
+#0 /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/BaseNode.php(195): Symfony\Component\Config\Definition\ArrayNode->normalizeValue(Array)
+#1 /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/ArrayNode.php(260): Symfony\Component\Config\Definition\BaseNode->normalize(Array)
+#2 /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/BaseNode.php(195): Symfony\Component\Config\Definition\ArrayNode->normalizeValue(Array)
+#3 /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/Processor.php(35): Symfony\Component\Config\Definition\BaseNode->normalize(Array)
+#4 /home4/sensetop/public_h in /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/ArrayNode.php on line 268
+[14-Nov-2012 01:52:13 UTC] PHP Fatal error:  Uncaught exception 'Symfony\Component\Config\Definition\Exception\InvalidConfigurationException' with message 'Unrecognized options "collate" under "doctrine.dbal"' in /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/ArrayNode.php:268
+Stack trace:
+#0 /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/BaseNode.php(195): Symfony\Component\Config\Definition\ArrayNode->normalizeValue(Array)
+#1 /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/ArrayNode.php(260): Symfony\Component\Config\Definition\BaseNode->normalize(Array)
+#2 /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/BaseNode.php(195): Symfony\Component\Config\Definition\ArrayNode->normalizeValue(Array)
+#3 /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/Processor.php(35): Symfony\Component\Config\Definition\BaseNode->normalize(Array)
+#4 /home4/sensetop/public_h in /home4/sensetop/public_html/Aedew/vendor/symfony/src/Symfony/Component/Config/Definition/ArrayNode.php on line 268
+[24-Apr-2013 04:01:53 America/Denver] PHP Warning:  Invalid argument supplied for foreach() in /home4/sensetop/public_html/jpAsiaSystem/vendor/doctrine-common/lib/Doctrine/Common/Annotations/FileCacheReader.php on line 196
+[22-Jul-2013 06:15:24 America/Denver] PHP Catchable fatal error:  Argument 3 passed to Symfony\Component\Form\FormBuilder::add() must be of the type array, string given, called in /home4/sensetop/public_html/jpAsiaSystem/src/Aedes/AedewBundle/Controller/WebAdminController.php on line 176 and defined in /home4/sensetop/public_html/jpAsiaSystem/vendor/symfony/src/Symfony/Component/Form/FormBuilder.php on line 528

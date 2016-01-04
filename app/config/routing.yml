@@ -1,0 +1,75 @@
+_assetic:
+    resource: .
+    type:     assetic
+
+file:
+    pattern: /{id}
+    defaults: { _controller: AedesAedewBundle:File:index, id: 0}
+
+jsonAcc:
+    pattern: /json/acc
+    defaults: { _controller: AedesAedewBundle:File:jsonAcc}
+
+jsonFile:
+    pattern: /json/file/{id}
+    defaults: { _controller: AedesAedewBundle:File:jsonFile, id: 0}
+
+login:
+    pattern: /admin/login
+    defaults: { _controller: AedesAedewBundle:WebAdmin:login}
+
+logout:
+    pattern: /admin/logout
+    defaults: { _controller: AedesAedewBundle:WebAdmin:logout}
+
+menu:
+    pattern: /admin/view/{id}
+    defaults: { _controller: AedesAedewBundle:WebAdmin:menu, id: 0}
+
+userSetAcc:
+    pattern: /admin/set/acc
+    defaults: { _controller: AedesAedewBundle:WebAdmin:setAcc}
+
+newFile:
+    pattern: /admin/new/file
+    defaults: { _controller: AedesAedewBundle:WebAdmin:newFile}
+
+setFile:
+    pattern: /admin/set/file/{id}
+    defaults: { _controller: AedesAedewBundle:WebAdmin:setFile, id: 0}
+
+delFile:
+    pattern: /admin/del/file/{id}
+    defaults: { _controller: AedesAedewBundle:WebAdmin:delFile, id: 0}
+
+success:
+    pattern: /admin/success
+    defaults: { _controller: AedesAedewBundle:WebAdmin:success}
+
+error:
+    pattern: /admin/error/{error}/{sendTo}
+    defaults: { _controller: AedesAedewBundle:WebAdmin:error, error: "404", sendTo: "menu"}
+
+contact:
+    pattern: /web/contact/{id}
+    defaults: { _controller: AedesAedewBundle:File:contact, id: 0}
+
+msg:
+    pattern: /msg/{msg}/{sendTo}
+    defaults: { _controller: AedesAedewBundle:WebAdmin:msg, msg: "done", sendTo: "file"}
+
+viewContact:
+    pattern: /admin/contact
+    defaults: { _controller: AedesAedewBundle:WebAdmin:viewContact}
+
+delContact:
+    pattern: /admin/del/contact/{id}
+    defaults: { _controller: AedesAedewBundle:WebAdmin:delContact, id: 0}
+
+mobileView:
+    pattern: /mobile/view/{id}
+    defaults: { _controller: AedesAedewBundle:File:mobileIndex, id: 0}
+
+mobileContact:
+    pattern: /mobile/contact/{id}
+    defaults: { _controller: AedesAedewBundle:File:mobileContact, id: 0}

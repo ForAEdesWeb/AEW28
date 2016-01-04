@@ -1,0 +1,51 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block stylesheets %}
+<style>
+span
+{
+    width: 200px;
+    display: block;
+    float: left;
+}
+li
+{
+    display: block;
+    clear: both;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<ol id="contentAdminUser">
+    <li>
+        <span>新增時間</span>
+        <span>目標商品</span>
+        <span>標題</span>
+        <span>聯絡人</span>
+        <span>電話</span>
+    </li>
+    {% for data in msg %}
+    <li>
+        <span>{{ data.getAddTime()|date }}</span>
+        <span class="taget">{{ data.getTaget() }}</span>
+        <span>{{ data.getTitle() }}</span>
+        <span>{{ data.getName() }}</span>
+        <span>{{ data.getPhone() }}</span>
+    </li>
+    {% endfor %}
+</ol>
+{% endblock %}
+
+{% block js %}
+$(function(){
+    $(".taget").each(function(){
+    {% for data in file %}
+        if($(this).html() == "{{ data.getId() }}")
+            $(this).html("{{ data.getTitle() }}");
+    {% endfor %}
+    });
+});
+{% endblock %}

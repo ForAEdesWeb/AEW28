@@ -1,0 +1,222 @@
+html, body
+{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #ccc;
+    margin: 0;
+    padding: 0;
+}
+
+a, a:hover
+{
+    color: #000;
+    text-decoration: none;
+    background-repeat: no-repeat;
+}
+
+#header, #content, #footer
+{
+    width: 982px;
+    padding: 25px;
+    margin: 0 auto;
+    //background-color: #fee4ed;
+}
+
+#header
+{
+}
+
+#header .logo
+{
+    width: 275px;
+    height: 150px;
+}
+
+#header .img, #header .img ul li
+{
+    width: 700px;
+    height: 550px;
+    overflow: hidden;
+}
+
+#header .img
+{
+    //background-image: url("/public/web1/img/img.jpg");
+}
+
+#header .img ul
+{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#header .img ul li
+{
+    display: block;
+}
+
+#header ul
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+/** for admin.
+    so we can't use li a for this. need to use class **/
+.button
+{
+    width: 230px;
+    height: 32px;
+    padding: 20px 0px 20px 45px;
+    margin: 8px 0;
+    font-size: 12px;
+    display: block;
+}
+/*
+.b1 a
+{
+    background-image: url("/public/web1/img/b1.png");
+}
+
+.b1 a:hover
+{
+    background-image: url("/public/web1/img/b1h.png");
+}
+
+.b2 a
+{
+    background-image: url("/public/web1/img/b2.png");
+}
+
+.b2 a:hover
+{
+    background-image: url("/public/web1/img/b2h.png");
+}
+
+.b3 a
+{
+    background-image: url("/public/web1/img/b3.png");
+}
+
+.b3 a:hover
+{
+    background-image: url("/public/web1/img/b3h.png");
+}
+
+.b4 a
+{
+    background-image: url("/public/web1/img/b4.png");
+}
+
+.b4 a:hover
+{
+    background-image: url("/public/web1/img/b4h.png");
+}
+
+.b5 a
+{
+    background-image: url("/public/web1/img/b5.png");
+}
+
+.b5 a:hover
+{
+    background-image: url("/public/web1/img/b5h.png");
+}
+*/
+
+#content
+{
+}
+
+#content .title
+{
+    width: auto;
+    height: 31px;
+    overflow: hidden;
+    display: block;
+    //background-image: url("/public/web1/img/title.png");
+    background-repeat: repeat-x;
+    padding: 0;
+    margin: 12px 0;
+    padding: 2px 35px;
+    //color: #fff;
+}
+
+#content .text
+{
+
+}
+
+#content .child
+{
+    width: 215px;
+    height: 285px;
+    margin: 0px 12px;
+    overflow: hidden;
+    float: left;
+}
+
+#content .child h1
+{
+    width: 215px;
+    height: 50px;
+    padding: 20px 0 0 0;
+    margin: 0;
+    text-align: center;
+    overflow: hidden;
+    font-size: 15px;
+}
+
+#content .child h1 a
+{
+    color: #000;
+}
+
+#content .child h2
+{
+    width: 211px;
+    height: 211px;
+    padding: 0;
+    margin: 0;
+    border: 2px solid #78358e;
+    overflow: hidden;
+}
+
+#footer .endbutton
+{
+    text-align: center;
+    padding-top: 15px;
+    height: 36px;
+    //background-image: url("/public/web1/img/footer.png");
+    background-repeat: repeat-x;
+}
+
+#footer .endbutton a, #footer .endbutton a:hover
+{
+    color: #fff;
+    font-size: 13px;
+    padding: 0 28px;
+}
+
+#footer
+{
+    margin-bottom: 50px;
+}
+
+.floatLeft
+{
+    float: left;
+}
+
+.floatRight
+{
+    float: right;
+}
+
+.cr
+{
+    clear: both;
+}

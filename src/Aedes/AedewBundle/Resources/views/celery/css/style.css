@@ -1,0 +1,305 @@
+*
+{
+    font-family: 'Domine', serif;
+}
+
+html, body
+{
+    width: 100%;
+    height: 100%;
+}
+
+body
+{
+    padding: 0;
+    margin: 0;
+    min-width: 1024px;
+    background-color: #FFF6EA;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+img
+{
+    border: 0;
+    max-width: 100%;
+}
+
+a
+{
+    color: #fff;
+    text-decoration: none;
+}
+
+h2
+{
+    font-family: 'Italianno', cursive;
+    font-size: 1.8em;
+    color: #e9cca3;
+}
+
+#header, #footer
+{
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    min-width: 1024px;
+    background-color: #6c3913;
+}
+
+/** main */
+
+#header
+{
+    top: 0px;
+    left: 0px;
+}
+
+#footer
+{
+    bottom: 0px;
+    left: 0px;
+}
+
+#content
+{
+    padding: 150px 0;
+}
+
+/** main */
+
+/** header */
+
+#header .photo
+{
+    width: 100%;
+    height: 82px;
+    background-image: url("/public/celery/img/titlePhoto.jpg");
+    background-repeat: no-repeat;
+    background-color: #422213;
+    overflow: hidden;
+}
+/** old logo
+#header .photo img[title="logo"]
+{
+    top: 0px;
+    right: 245px;
+    width: 175px;
+    height: 84px;
+    overflow: hidden;
+    display: block;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+}
+*/
+#header .photo div[title="logo"]
+{
+    top: 0px;
+    right: 245px;
+    width: 119px;
+    height: 82px;
+    overflow: hidden;
+    display: block;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    background-image: url("/public/celery/img/logo.png");
+    background-repeat: no-repeat;
+    background-position: -14px -14px;
+}
+
+#header .photo div[title="button"]
+{
+    top: 30px;
+    right: 0px;
+    width: 230px;
+    height: 30px;
+    background-color: #6a3906;
+    font-family: 'Lato', sans-serif;
+    opacity: 0.65;
+    display: block;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+}
+
+#header .photo div[title="button"] a
+{
+    padding: 0px 10px;
+}
+
+#header .photo div[title="button"] img
+{
+    margin: 0 3px;
+    height: 20px;
+}
+
+#header .photo div[title="social"]
+{
+    top: 50px;
+    right: 418px;
+    display: block;
+    width: 300px;
+    height: 50px;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+}
+
+#header .photo div[title="chrMov"]
+{
+    top: 0;
+    right: 370px;
+    width: 124px;
+    height: 82px;
+    background-image: url("/public/celery/img/headerChrMov.png");
+    background-repeat: no-repeat;
+    background-position: -7px -8px;
+    overflow: hidden;
+    position: absolute;
+}
+
+#header .botton
+{
+    background-color: #6c3913;
+}
+
+#header .botton *
+{
+    -webkit-transition:All 1s ease;
+}
+
+#header .botton a, #header .botton a:hover
+{
+    margin: 5px 10px;
+    padding: 5px 30px;
+    color: #fff;
+    display: block;
+    float: left;
+}
+
+#header .botton a:hover
+{
+    background-color: #422114;
+}
+
+/** header */
+
+/** content */
+
+
+.mask, .movingBackground
+{
+    height: 467px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    -webkit-transition:All 2s ease;
+}
+
+.mask
+{
+    color: #fff;
+}
+
+.mask h1
+{
+    margin-top: 0;
+}
+
+.mask ol
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.mask li
+{
+    padding: 5px;
+}
+
+.mask[title="1"]
+{
+    padding: 130px 0 0 425px;
+    background-image: url("/public/celery/img/1.png");
+}
+
+.mask[title="2"]
+{
+    padding: 95px 0 0 455px;
+    background-image: url("/public/celery/img/2.png");
+}
+
+.mask[title="3"]
+{
+    padding: 120px 0 0 455px;
+    background-image: url("/public/celery/img/3.png");
+}
+
+.mask[title="4"]
+{
+    padding: 120px 0 0 455px;
+    background-image: url("/public/celery/img/4.png");
+}
+
+.movingBackground[title="1"]
+{
+    background-image: url("/public/celery/img/1.jpg");
+}
+
+.movingBackground[title="2"]
+{
+    background-image: url("/public/celery/img/2.jpg");
+}
+
+.movingBackground[title="3"]
+{
+    background-image: url("/public/celery/img/3.jpg");
+}
+
+.movingBackground[title="4"]
+{
+    background-image: url("/public/celery/img/4.jpg");
+}
+
+/** tmp code */
+#content img
+{
+    margin: 0 auto;
+    display: block;
+}
+/** tmp code */
+
+#content .textBox
+{
+    width: 1024px;
+    margin: 0 auto;
+}
+
+/** content */
+
+/** menu */
+
+#menu
+{
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+}
+
+#menu .turn-page
+{
+    background-color:#ccc;
+    background-size:100% 100%;
+}
+
+
+/** menu */
+
+.cr
+{
+    clear: both;
+}

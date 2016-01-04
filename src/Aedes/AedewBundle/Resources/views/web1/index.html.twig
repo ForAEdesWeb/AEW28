@@ -1,0 +1,126 @@
+{% extends "::base.html.twig" %}
+
+{% block head %}
+{% stylesheets
+    '@AedesAedewBundle/Resources/views/web1/style.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+<div id="header">
+    <div class="logo floatLeft">
+        {{ acc.getLogo()|raw }}
+    </div>
+    <div class="img floatRight">
+        <ul>
+            {% for data in img %}
+            <li>
+                {% if admin|default(false) %}
+                    <a href="{{ path("setFile", {id: data.getId()}) }}">修改</a>
+                    <a href="{{ path("delFile", {id: data.getId()}) }}">刪除</a>
+                {% endif %}
+                {{ data.getContent()|raw }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <ul class="floatLeft">
+        {% for data in rootMenu %}
+        <li>
+            {% if admin|default(false) %}
+                <a class="button" href="{{ path("menu", {id: data.getId()}) }}">{{ data.getTitle() }}</a>
+                <a href="{{ path("setFile", {id: data.getId()}) }}">修改</a>
+                <a href="{{ path("delFile", {id: data.getId()}) }}">刪除</a>
+            {% else %}
+                <a class="button" href="{{ path("file", {id: data.getId()}) }}">{{ data.getTitle() }}</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    <br class="cr" />
+</div>
+
+<div id="content">
+    <h1 class="title">{{ file.getTitle() }}</h1>
+
+    {% if file.getShareButton()|default(false) %}
+    <div>
+        <div class="fb-like" data-send="true" data-layout="button_count" data-width="50" data-show-faces="true"></div>
+        <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+        <g:plusone></g:plusone>
+    </div>
+    {% endif %}
+
+    {% if file.isDir() %}
+
+        {% for data in child %}
+            <div class="child">
+                <h2>{{ data.getSubject()|raw }}</h2>
+                <h1>
+                    {% if admin|default(false) %}
+                        <a href="{{ path("menu", {id: data.getId()}) }}">{{ data.getTitle() }}</a>
+                        <a href="{{ path("setFile", {id: data.getId()}) }}">修改</a>
+                        <a href="{{ path("delFile", {id: data.getId()}) }}">刪除</a>
+                    {% else %}
+                        <a href="{{ path("file", {id: data.getId()}) }}">{{ data.getTitle() }}</a>
+                    {% endif %}
+                </h1>
+            </div>
+        {% endfor %}
+
+    {% else %}
+
+        {% if admin|default(false) %}
+            <a href="{{ path("setFile", {id: file.getId()}) }}">修改</a>
+            <a href="{{ path("delFile", {id: file.getId()}) }}">刪除</a>
+        {% endif %}
+
+        <div class="text">
+            {{ file.getSubject()|raw }}
+        </div>
+        <div>
+            <a href="{{ path("contact", {id: file.getId()}) }}">訂購</a>
+        </div>
+        <div class="text">
+            {{ file.getContent()|raw }}
+        </div>
+
+    {% endif %}
+    <br class="cr" />
+    {% if file.getFacebookComment()|default(false) %}
+    <div class="fb-comments" data-href="http://{{ acc.getDomain() }}/{{ file.getId() }}" data-num-posts="2" data-width="470"></div>
+    {% endif %}
+</div>
+
+<div id="footer">
+    <div class="endbutton">
+        {% for data in rootMenu %}
+
+            {% if admin|default(false) %}
+                <a href="{{ path("menu", {id: data.getId()}) }}">{{ data.getTitle() }}</a>
+                <a href="{{ path("setFile", {id: data.getId()}) }}">修改</a>
+                <a href="{{ path("delFile", {id: data.getId()}) }}">刪除</a>
+            {% else %}
+                <a href="{{ path("file", {id: data.getId()}) }}">{{ data.getTitle() }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+$(function(){
+    var sum = 0;
+
+    $("#header > ul > li").each(function(){
+        sum++;
+
+        if(sum > 5)
+            sum = 1;
+
+        $(this).addClass("b" + sum);
+    });
+});
+{% endblock %}

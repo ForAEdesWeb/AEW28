@@ -1,0 +1,4 @@
+#symfony
+
+app/cache/*
+app/logs/*
